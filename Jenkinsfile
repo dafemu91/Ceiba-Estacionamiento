@@ -27,6 +27,7 @@ pipeline {
 				doGenerateSubmoduleConfigurations: false, extensions: [], gitTool:	'Git_Centos', 
 				submoduleCfg: [], userRemoteConfigs: [[credentialsId:	'GitHub_dafemu91', 
 				url: 'https://github.com/dafemu91/Ceiba-Estacionamiento']]])
+				sh 'gradle clean'
 	 		}
 	 	}
 	 	
@@ -65,7 +66,8 @@ pipeline {
 	 	}	
 		 success {
 		 		echo 'This will run only if successful'
-		 		junit '**/jacoco/test-results/*.xml'
+		 		junit 'build/test-results/*.xml'
+		 		jacoco 'jacoco/test-results/*.xml'
 		 }
 		 failure {
 		 	echo 'This will run only if failed'
