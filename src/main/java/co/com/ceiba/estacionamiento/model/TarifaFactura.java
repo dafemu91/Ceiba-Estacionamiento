@@ -1,29 +1,32 @@
 package co.com.ceiba.estacionamiento.model;
 
+import co.com.ceiba.estacionamiento.model.entity.FacturaEntity;
+import co.com.ceiba.estacionamiento.model.entity.TarifaEntity;
+
 public class TarifaFactura {
 	
-	private Factura factura;
+	private FacturaEntity factura;
 	
-	private Tarifa tarifa;
+	private TarifaEntity tarifa;
 	
-	public TarifaFactura(Factura factura, Tarifa tarifa) {
-		this.factura = factura;
-		this.tarifa = tarifa;
+	public TarifaFactura(FacturaEntity factur, TarifaEntity tarifaCilindraje) {
+		this.factura = factur;
+		this.tarifa = tarifaCilindraje;
 	}
 
-	public Factura getFactura() {
+	public FacturaEntity getFactura() {
 		return factura;
 	}
 
-	public void setFactura(Factura factura) {
+	public void setFactura(FacturaEntity factura) {
 		this.factura = factura;
 	}
 
-	public Tarifa getTarifa() {
+	public TarifaEntity getTarifa() {
 		return tarifa;
 	}
 
-	public void setTarifa(Tarifa tarifa) {
+	public void setTarifa(TarifaEntity tarifa) {
 		this.tarifa = tarifa;
 	}
 

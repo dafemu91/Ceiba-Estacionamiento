@@ -30,4 +30,6 @@ public interface IVehiculoService {
 	 * eliminar vehiculo
 	 */
 	void eliminar(Long id);
+	
+	Integer findVehiculoByTipoVehiculoActivo(Long id);
 }

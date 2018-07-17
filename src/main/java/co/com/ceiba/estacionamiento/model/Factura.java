@@ -3,6 +3,8 @@ package co.com.ceiba.estacionamiento.model;
 import java.io.Serializable;
 import java.util.Date;
 
+import co.com.ceiba.estacionamiento.model.entity.VehiculoEntity;
+
 public class Factura implements Serializable{
 
 	private static final long serialVersionUID = 1L;
@@ -10,15 +12,21 @@ public class Factura implements Serializable{
 	private String descripcion;
 	private Date fechaIngreso;
 	private Date fechaSalida;
-	private Vehiculo vehiculo;
+	private VehiculoEntity vehiculo;
 	private double valorFinal;
 
-	public Factura(String descripcion, Date fechaIngreso, Date fechaSalida, Vehiculo vehiculo, double valorFinal) {
+	public Factura(String descripcion, Date fechaIngreso, Date fechaSalida, VehiculoEntity vehiculo, double valorFinal) {
 		this.descripcion = descripcion;
 		this.fechaIngreso = fechaIngreso;
 		this.fechaSalida = fechaSalida;
 		this.vehiculo = vehiculo;
 		this.valorFinal = valorFinal;
+	}
+
+	public Factura(String descripcion, Date fechaIngreso, VehiculoEntity vehiculo) {
+		this.descripcion =  descripcion;
+		this.fechaIngreso = fechaIngreso;
+		this.vehiculo = vehiculo;
 	}
 
 	public String getDescripcion() {
@@ -39,7 +47,7 @@ public class Factura implements Serializable{
 		this.fechaSalida = fechaSalida;
 	}
 	
-	public Vehiculo getVehiculo() {
+	public VehiculoEntity getVehiculo() {
 		return vehiculo;
 	}
 	

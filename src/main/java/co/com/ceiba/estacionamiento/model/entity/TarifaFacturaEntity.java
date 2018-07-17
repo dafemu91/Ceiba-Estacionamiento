@@ -2,9 +2,7 @@ package co.com.ceiba.estacionamiento.model.entity;
 
 import java.io.Serializable;
 
-import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -23,17 +21,16 @@ public class TarifaFacturaEntity implements Serializable{
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	private Long id;
 	
-	@ManyToOne(fetch=FetchType.LAZY)
+	@ManyToOne
+	@JoinColumn(name="tarifa_id")
+	private TarifaEntity tarifa;
+	
+	@ManyToOne
+	@JoinColumn(name="factura_id")
 	private FacturaEntity factura;
 	
-	
 	@NotNull
-	@Column(name="tarifa_id")
-	private Long idTarifa;
-	
-	@ManyToOne(fetch=FetchType.LAZY)
-	@JoinColumn(name="tarifa_id", insertable= false, updatable=false)
-	private TarifaEntity tarifa;
+	private int cantidad;
 
 	public Long getId() {
 		return id;
@@ -43,20 +40,12 @@ public class TarifaFacturaEntity implements Serializable{
 		this.id = id;
 	}
 
-	public FacturaEntity getFactura() {
-		return factura;
+	public int getCantidad() {
+		return cantidad;
 	}
 
-	public void setFactura(FacturaEntity factura) {
-		this.factura = factura;
-	}
-
-	public Long getIdTarifa() {
-		return idTarifa;
-	}
-
-	public void setIdTarifa(Long idTarifa) {
-		this.idTarifa = idTarifa;
+	public void setCantidad(int cantidad) {
+		this.cantidad = cantidad;
 	}
 
 	public TarifaEntity getTarifa() {
@@ -65,6 +54,14 @@ public class TarifaFacturaEntity implements Serializable{
 
 	public void setTarifa(TarifaEntity tarifa) {
 		this.tarifa = tarifa;
+	}
+
+	public FacturaEntity getFactura() {
+		return factura;
+	}
+
+	public void setFactura(FacturaEntity factura) {
+		this.factura = factura;
 	}
 	
 	

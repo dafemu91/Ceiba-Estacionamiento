@@ -32,5 +32,10 @@ public interface ITarifaFacturaService {
 	 * eliminar registro tarifa_factura
 	 */
 	void eliminar(Long id);
+	
+	/**
+	 * Guardar varias entidades
+	 */
+	void guardarTodos(List<TarifaFacturaEntity> tarifasFacturas);
 
 }

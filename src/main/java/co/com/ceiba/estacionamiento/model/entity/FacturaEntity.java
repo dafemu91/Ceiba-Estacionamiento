@@ -12,6 +12,7 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
@@ -35,21 +36,22 @@ public class FacturaEntity implements Serializable{
 	private String descripcion;
 	
 	@NotNull
-	@Temporal(TemporalType.DATE)
+	@Temporal(TemporalType.TIMESTAMP)
 	@Column(name="fecha_ingreso")
-	@DateTimeFormat(pattern="yyyy-MM-dd")
+	@DateTimeFormat(pattern="yyyy/MM/dd hh:mm:ss")
 	private Date fechaIngreso;
 	
-	@Temporal(TemporalType.DATE)
+	@Temporal(TemporalType.TIMESTAMP)
 	@Column(name="fecha_salida")
-	@DateTimeFormat(pattern="yyyy-MM-dd")
+	@DateTimeFormat(pattern="yyyy/MM/dd hh:mm:ss")
 	private Date fechaSalida;
 	
-	@ManyToOne(fetch=FetchType.LAZY)
+	@OneToMany(mappedBy="factura", cascade= {CascadeType.ALL}, fetch = FetchType.LAZY)
+	private List<TarifaFacturaEntity> tarifaFacturas;
+	
+	@ManyToOne
+	@JoinColumn(name="vehiculo_id")
 	private VehiculoEntity vehiculo;
-
-	@OneToMany(mappedBy="tarifa", fetch = FetchType.LAZY, cascade=CascadeType.ALL)
-	public List<TarifaFacturaEntity> tarifaFacturas;
 	
 	private double valorFinal;
 	
@@ -57,6 +59,17 @@ public class FacturaEntity implements Serializable{
 		tarifaFacturas = new ArrayList<TarifaFacturaEntity>();
 	}
 	
+	
+	public List<TarifaFacturaEntity> getTarifaFacturas() {
+		return tarifaFacturas;
+	}
+
+
+	public void setTarifaFacturas(List<TarifaFacturaEntity> tarifaFacturas) {
+		this.tarifaFacturas = tarifaFacturas;
+	}
+
+
 	public Long getId() {
 		return id;
 	}
@@ -86,17 +99,6 @@ public class FacturaEntity implements Serializable{
 	}
 	public void setVehiculo(VehiculoEntity vehiculo) {
 		this.vehiculo = vehiculo;
-	}
-	public List<TarifaFacturaEntity> getTarifaFacturas() {
-		return tarifaFacturas;
-	}
-
-	public void setTarifaFacturas(List<TarifaFacturaEntity> tarifaFacturas) {
-		this.tarifaFacturas = tarifaFacturas;
-	}
-	
-	public void addTarifaFactura(TarifaFacturaEntity tarifaFactura) {
-		this.tarifaFacturas.add(tarifaFactura);
 	}
 
 	public double getValorFinal() {

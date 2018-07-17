@@ -1,4 +1,4 @@
-package co.com.ceiba.estacionamiento.dao;
+package co.com.ceiba.estacionamiento.integracion.dao;
 
 import static org.junit.Assert.assertEquals;
 

@@ -1,8 +1,9 @@
 package co.com.ceiba.estacionamiento.model.service;
 
 import java.util.List;
+import java.util.Optional;
 
-import co.com.ceiba.estacionamiento.model.Tarifa;
+import co.com.ceiba.estacionamiento.model.entity.TarifaEntity;
 
 
 public interface ITarifaService {
@@ -10,26 +11,26 @@ public interface ITarifaService {
 	/**
 	 * Consultar todas las tarifa
 	 */
-	List<Tarifa> findAll();
+	List<TarifaEntity> findAll();
 	
 	/**
 	 * Consultar tarifa por id
 	 */
-	Tarifa findById(int id);
+	Optional<TarifaEntity> findById(Long id);
 		
 	/**
 	 * Editar tarifa
 	 */
-	void actualizar(Tarifa tarifa);
+	void actualizar(TarifaEntity tarifa);
 	
 	/**
 	 * Guardar tarifa
 	 */
-	void guardar(Tarifa tarifa);
+	void guardar(TarifaEntity tarifa);
 	
 	/**
 	 * eliminar tarifa
 	 */
-	void eliminar(int id);
+	void eliminar(Long id);
 
 }

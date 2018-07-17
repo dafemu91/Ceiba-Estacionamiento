@@ -12,7 +12,6 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
-import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 
 @Entity
@@ -22,7 +21,6 @@ public class TarifaEntity implements Serializable{
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	@NotNull
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	private Long id;
 	
@@ -31,6 +29,13 @@ public class TarifaEntity implements Serializable{
 	
 	@NotNull
 	private double valor;
+	
+	@OneToMany(mappedBy="tarifa", cascade={CascadeType.ALL}, fetch = FetchType.LAZY)
+	private List<TarifaFacturaEntity> tarifaFacturas;
+	
+	public TarifaEntity() {
+		tarifaFacturas = new ArrayList<TarifaFacturaEntity>();
+	}
 	
 	public Long getId() {
 		return id;

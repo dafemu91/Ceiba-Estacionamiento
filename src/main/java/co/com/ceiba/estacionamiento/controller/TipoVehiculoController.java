@@ -10,15 +10,15 @@ import co.com.ceiba.estacionamiento.model.entity.TipoVehiculoEntity;
 import co.com.ceiba.estacionamiento.model.service.ITipoVehiculoService;
 
 @RestController
-@RequestMapping("/parqueadero")
+@RequestMapping("/tipoVehiculo")
 public class TipoVehiculoController {
 	
 	@Autowired
-	private ITipoVehiculoService tipoVehiculoDAO;
+	private ITipoVehiculoService tipoVehiculoService;
 	
 	@PostMapping("/crearTipoVehiculo")
 	public void guardar(@RequestBody TipoVehiculoEntity tipoVehiculoEntity) {
-		tipoVehiculoDAO.guardar(tipoVehiculoEntity);
+		tipoVehiculoService.guardar(tipoVehiculoEntity);
 	}
 	
 	

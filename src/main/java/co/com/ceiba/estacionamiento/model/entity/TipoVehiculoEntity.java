@@ -24,11 +24,17 @@ public class TipoVehiculoEntity implements Serializable{
 
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
-	@NotNull
 	private Long id;
 	
 	@NotNull
 	private String descripcion;
+	
+	@OneToMany(mappedBy="tipoVehiculo", cascade={CascadeType.ALL}, fetch = FetchType.LAZY)
+	private List<VehiculoEntity> vehiculos;
+	
+	public TipoVehiculoEntity() {
+		vehiculos = new ArrayList<VehiculoEntity>();
+	}
 	
 	public Long getId() {
 		return id;
