@@ -16,6 +16,11 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.JsonIdentityReference;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
+
 
 @Entity
 @Table(name="vehiculo")
@@ -70,7 +75,7 @@ public class VehiculoEntity implements Serializable {
 	}
 	public List<FacturaEntity> getFacturas() {
 		return facturas;
-	}
+	} 
 	public void setFacturas(List<FacturaEntity> facturas) {
 		this.facturas = facturas;
 	}

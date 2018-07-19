@@ -10,9 +10,10 @@ public class TarifaFacturaBuilder {
 	public static TarifaFactura convertirAObject(TarifaFacturaEntity tarifaFacturaEntity) {
 		FacturaEntity factura = tarifaFacturaEntity.getFactura();
 		TarifaEntity tarifa = tarifaFacturaEntity.getTarifa();
+		Integer cantidad = tarifaFacturaEntity.getCantidad();
 		TarifaFactura tarifaFactura= null;
 		if(tarifaFacturaEntity != null) {
-			tarifaFactura = new TarifaFactura(factura, tarifa);
+			tarifaFactura = new TarifaFactura(factura, tarifa, cantidad);
 		}
 		return tarifaFactura;
 	}
@@ -20,9 +21,11 @@ public class TarifaFacturaBuilder {
 	public static TarifaFacturaEntity convertirAEntity(TarifaFactura tarifaFactura) {
 		FacturaEntity factura = tarifaFactura.getFactura();
 		TarifaEntity tarifa = tarifaFactura.getTarifa();
+		Integer cantidad = tarifaFactura.getCantidad();
 		TarifaFacturaEntity tarifaFacturaEntity = new TarifaFacturaEntity();
 		tarifaFacturaEntity.setFactura(factura);
 		tarifaFacturaEntity.setTarifa(tarifa);
+		tarifaFacturaEntity.setCantidad(cantidad);
 		return tarifaFacturaEntity;
 	}
 

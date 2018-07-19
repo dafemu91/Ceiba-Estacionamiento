@@ -53,6 +53,12 @@ public class TarifaFacturaServiceImpl implements ITarifaFacturaService{
 	public void guardarTodos(List<TarifaFacturaEntity> tarifasFacturas) {
 		tarifaFacturaDAO.saveAll(tarifasFacturas);
 	}
+
+	@Transactional
+	@Override
+	public List<TarifaFacturaEntity> findTarifasFacturasByIdFactura(Long idFactura) {
+		return tarifaFacturaDAO.findTarifasFacturasByIdFactura(idFactura);
+	}
 	
 	
 

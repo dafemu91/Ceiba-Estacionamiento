@@ -3,6 +3,8 @@ package co.com.ceiba.estacionamiento.model;
 import java.io.Serializable;
 import java.util.Date;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import co.com.ceiba.estacionamiento.model.entity.VehiculoEntity;
 
 public class Factura implements Serializable{
@@ -12,10 +14,12 @@ public class Factura implements Serializable{
 	private String descripcion;
 	private Date fechaIngreso;
 	private Date fechaSalida;
+	
+	@JsonIgnore
 	private VehiculoEntity vehiculo;
 	private double valorFinal;
 
-	public Factura(String descripcion, Date fechaIngreso, Date fechaSalida, VehiculoEntity vehiculo, double valorFinal) {
+	public Factura(String descripcion, Date fechaIngreso , Date fechaSalida, VehiculoEntity vehiculo, double valorFinal) {
 		this.descripcion = descripcion;
 		this.fechaIngreso = fechaIngreso;
 		this.fechaSalida = fechaSalida;
@@ -47,6 +51,7 @@ public class Factura implements Serializable{
 		this.fechaSalida = fechaSalida;
 	}
 	
+	@JsonIgnore
 	public VehiculoEntity getVehiculo() {
 		return vehiculo;
 	}

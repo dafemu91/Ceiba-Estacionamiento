@@ -46,6 +46,11 @@ public class FacturaServiceImpl implements IFacturaService{
 	public void eliminar(Long id) {
 		facturaDAO.deleteById(id);
 	}
+
+	@Override
+	public FacturaEntity findFacturaVehiculoByPlaca(String placa) {
+		return facturaDAO.findFacturaVehiculoByPlaca(placa);
+	}
 	
 
 }

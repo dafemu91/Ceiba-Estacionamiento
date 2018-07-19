@@ -23,7 +23,7 @@ public class ValidatorCantidadVehiculos implements IValidator {
 		this.vehiculoService = vehiculoService;
 	}
 
-	@Transactional
+	@Transactional 
 	@Override
 	public void verificar(VehiculoEntity vehiculo) {
 		Long idTipoVehiculo = vehiculo.getTipoVehiculo().getId();

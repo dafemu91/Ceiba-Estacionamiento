@@ -9,9 +9,26 @@ public class TarifaFactura {
 	
 	private TarifaEntity tarifa;
 	
-	public TarifaFactura(FacturaEntity factur, TarifaEntity tarifaCilindraje) {
-		this.factura = factur;
+	private Integer cantidad;
+	
+	public Integer getCantidad() {
+		return cantidad;
+	}
+
+	public void setCantidad(Integer cantidad) {
+		this.cantidad = cantidad;
+	}
+	
+	public TarifaFactura(FacturaEntity factura, TarifaEntity tarifaCilindraje) {
+		this.factura = factura;
 		this.tarifa = tarifaCilindraje;
+		this.cantidad = 0;
+	}
+
+	public TarifaFactura(FacturaEntity factura, TarifaEntity tarifaCilindraje, int cantidad) {
+		this.factura = factura;
+		this.tarifa = tarifaCilindraje;
+		this.cantidad = cantidad;
 	}
 
 	public FacturaEntity getFactura() {

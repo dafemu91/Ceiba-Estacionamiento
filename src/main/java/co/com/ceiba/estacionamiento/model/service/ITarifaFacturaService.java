@@ -37,5 +37,10 @@ public interface ITarifaFacturaService {
 	 * Guardar varias entidades
 	 */
 	void guardarTodos(List<TarifaFacturaEntity> tarifasFacturas);
+	
+	/**
+	 * Consultar registros tarifa_factura asociados a un id factura
+	 */
+	List<TarifaFacturaEntity> findTarifasFacturasByIdFactura(Long idFactura);
 
 }

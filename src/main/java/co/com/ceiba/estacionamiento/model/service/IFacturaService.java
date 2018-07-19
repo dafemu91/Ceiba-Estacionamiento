@@ -33,5 +33,10 @@ public interface IFacturaService {
 	 * eliminar factura
 	 */
 	void eliminar(Long id);
+	
+	/**
+	 * Consultar factura de vehiculo activo
+	 */
+	FacturaEntity findFacturaVehiculoByPlaca(String placa);
 
 }

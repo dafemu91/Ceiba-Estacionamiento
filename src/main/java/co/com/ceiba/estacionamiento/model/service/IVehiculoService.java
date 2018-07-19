@@ -31,5 +31,25 @@ public interface IVehiculoService {
 	 */
 	void eliminar(Long id);
 	
+	/**
+	 * consultar vehiulo por tipo y si esta en el parqueadero
+	 * @param id
+	 * @return
+	 */
 	Integer findVehiculoByTipoVehiculoActivo(Long id);
+	
+	/**
+	 * consultar vehiculo por placa
+	 */
+	VehiculoEntity findByPlaca(String placa);
+	
+	/**
+	 * consultar vehiculo por placa
+	 */
+	VehiculoEntity findVehiculoByPlacaVehiculoActivo(String placa);
+	
+	/**
+	 * Consultar vehiculos activos en el parqueadero
+	 */
+	List<VehiculoEntity> findVehiculosActivos(); 
 }

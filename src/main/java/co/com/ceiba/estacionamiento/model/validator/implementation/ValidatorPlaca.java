@@ -19,5 +19,7 @@ public class ValidatorPlaca implements IValidator{
 			throw new ValidationException(Constantes.Excepciones.VEHICULO_NO_AUTORIZADO);
 		}
 	}
+	
+	
 
 }

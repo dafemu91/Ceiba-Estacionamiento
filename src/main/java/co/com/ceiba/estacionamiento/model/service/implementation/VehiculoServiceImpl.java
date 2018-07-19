@@ -15,7 +15,7 @@ public class VehiculoServiceImpl implements IVehiculoService{
 	
 	@Autowired
 	private IVehiculoDAO vehiculoDAO;
-
+ 
 	@Transactional
 	@Override
 	public void eliminar(Long id) {
@@ -53,6 +53,21 @@ public class VehiculoServiceImpl implements IVehiculoService{
 	public Integer findVehiculoByTipoVehiculoActivo(Long id) {
 		return vehiculoDAO.findVehiculoByTipoVehiculoActivo(id);
 		
+	}
+
+	@Override
+	public VehiculoEntity findByPlaca(String placa) {
+		return vehiculoDAO.findByPlaca(placa);
+	}
+
+	@Override
+	public VehiculoEntity findVehiculoByPlacaVehiculoActivo(String placa) {
+		return vehiculoDAO.findVehiculoByPlacaVehiculoActivo(placa);
+	}
+
+	@Override
+	public List<VehiculoEntity> findVehiculosActivos() {
+		return vehiculoDAO.findVehiculosActivos();
 	}
 	
 	
