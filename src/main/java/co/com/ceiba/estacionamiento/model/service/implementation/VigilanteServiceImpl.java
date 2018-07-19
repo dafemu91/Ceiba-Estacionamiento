@@ -1,5 +1,7 @@
 package co.com.ceiba.estacionamiento.model.service.implementation;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
@@ -117,14 +119,11 @@ public class VigilanteServiceImpl implements IVigilanteService{
 		
 		//actualizar cantidad de horas y dias en tarifa_factura segun la factura
 		List<TarifaFacturaEntity> tarifasFacturas = tarifaFacturaService.findTarifasFacturasByIdFactura(factura.getId());
-		insertarCantidadTarifaFactura(tarifasFacturas, horasDias);
-		
-		//calcular valor total a pagar
-		double valorTotal;
+		insertarCantidadTarifaFactura(tarifasFacturas, horasDias);		
 		
 		//obtener informacion factura con informacion actualizada
 		FacturaEntity facturaActual = facturaService.findById(factura.getId()).get();
-		valorTotal = calcularValorTotal(facturaActual);
+		double valorTotal = calcularValorTotal(facturaActual.getTarifaFacturas());
 		facturaActual.setValorFinal(valorTotal);
 		facturaService.actualizar(facturaActual);
 		
@@ -134,7 +133,7 @@ public class VigilanteServiceImpl implements IVigilanteService{
 	}
 
 	@Override
-	public List<Vehiculo> consultarVehiculo() {
+	public List<Vehiculo> consultarVehiculo() { 
 		List<Vehiculo> vehiculosRespuesta = new ArrayList<>();
 		List<VehiculoEntity> vehiculosActivos = vehiculoService.findVehiculosActivos();
 		if(vehiculosActivos==null) {
@@ -175,15 +174,30 @@ public class VigilanteServiceImpl implements IVigilanteService{
 		
 	}
 	
-	private Map<String, Long> calcularHorasDias(Date fechaIngreso, Date fechaSalida){
+	public Map<String, Long> calcularHorasDias(Date fechaIngreso, Date fechaSalida){
 		Map<String, Long> horaDias = new  HashMap<>();
 		Long fechaMilisegundos = fechaSalida.getTime() - fechaIngreso.getTime();
-		Long dias = ((fechaMilisegundos/(1000*60*60))+1)/9;
-		Long horasFaltantes = ((fechaMilisegundos/(1000*60*60))+1)%9;
+		Long dias = ((fechaMilisegundos/(1000*60*60))+1)/24; 
+		Long horasFaltantes = ((fechaMilisegundos/(1000*60*60))+1)%24;
+		if(horasFaltantes>=9) {
+			dias +=1;
+			horasFaltantes =0L;
+		}
 		horaDias.put(VALOR_DIAS, dias);
 		horaDias.put(VALOR_HORAS, horasFaltantes);
 		return horaDias;
 	}
+	
+	
+	
+//	public static void main(String[] args) throws ParseException {
+//		SimpleDateFormat ff = new SimpleDateFormat("dd/MM/yyyy hh:mm");
+//		Date fechaInicio = ff.parse("18/07/2018 05:00");
+//		Date fechaFin = new Date();
+//		Long fechaMilisegundos = fechaFin.getTime() - fechaInicio.getTime();
+//		Long dias = ((fechaMilisegundos/(1000*60*60))+1)/24; 
+//		Long horasFaltantes = ((fechaMilisegundos/(1000*60*60))+1)%24;
+//	}
 	
 	private void insertarCantidadTarifaFactura(List<TarifaFacturaEntity> tarifasFacturas, Map<String, Long> horasDias) {
 		for (TarifaFacturaEntity tarifaFacturaEntity : tarifasFacturas) {
@@ -209,9 +223,8 @@ public class VigilanteServiceImpl implements IVigilanteService{
 		}
 	}
 	
-	private double calcularValorTotal(FacturaEntity factura) {
+	public double calcularValorTotal(List<TarifaFacturaEntity> tarifasFacturas) {
 		double valorTotal = 0;
-		List<TarifaFacturaEntity> tarifasFacturas = factura.getTarifaFacturas();
 		for (TarifaFacturaEntity tarifaFacturaEntity : tarifasFacturas) {
 			valorTotal += tarifaFacturaEntity.getCantidad() * tarifaFacturaEntity.getTarifa().getValor();
 		}

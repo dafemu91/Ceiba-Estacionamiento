@@ -4,8 +4,8 @@ import java.util.List;
 
 import co.com.ceiba.estacionamiento.model.entity.VehiculoEntity;
 
-public interface IVehiculoService {
 
+public interface IVehiculoService{
 	/**
 	 * Consultar todos los vehiculos
 	 */
